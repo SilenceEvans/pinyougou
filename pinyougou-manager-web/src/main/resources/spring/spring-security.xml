@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+        xmlns="http://www.springframework.org/schema/security"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd
+						    http://www.springframework.org/schema/security
+						    http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!--配置不登录也可以访问的页面-->
+    <http pattern="/*.html" security="none"/>
+    <http pattern="/css/**" security="none"/>
+    <http pattern="/img/**" security="none"/>
+    <http pattern="/js/**" security="none"/>
+    <http pattern="/plugins/**" security="none"/>
+
+    <!--页面拦截规则-->
+    <!--不使用SPEL表达式，false-->
+    <http use-expressions="false">
+        <!--除ADMIN角色外，其余都拦截-->
+        <intercept-url pattern="/**" access="ROLE_ADMIN"/>
+        <!--自定义页面-->
+        <!--配置自定义登录页面-->
+        <!--配置登录成功后跳转到首页-->
+        <!--配置登录成功后始终跳转到首页-->
+        <!--配置登录失败后重新跳转到登录页面-->
+        <!--定义发送登录请求的路径、用户名及密码参数信息名称-->
+        <form-login login-page="/login.html"
+                    default-target-url="/admin/index.html"
+                    always-use-default-target="true"
+                    authentication-failure-url="/login.html"
+                    username-parameter="username"
+                    password-parameter="password"/>
+        <!--关闭跨站请求-->
+        <csrf disabled="true"/>
+        <!--允许使用内置框架页-->
+        <headers>
+            <frame-options policy="SAMEORIGIN"/>
+        </headers>
+        <!--清除退出信息-->
+        <logout logout-url="" logout-success-url=""/>
+    </http>
+
+    <!--配置认证管理器-->
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="123456" authorities="ROLE_ADMIN"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+
+
+</beans:beans>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+        xmlns="http://www.springframework.org/schema/security"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://code.alibabatech.com/schema/dubbo
+                            http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+						    http://www.springframework.org/schema/security
+						    http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!--配置不登录也可以访问的页面-->
+    <http pattern="/shoplogin.html" security="none"/>
+    <http pattern="/css/**" security="none"/>
+    <http pattern="/img/**" security="none"/>
+    <http pattern="/js/**" security="none"/>
+    <http pattern="/plugins/**" security="none"/>
+    <http pattern="/seller/add.do" security="none"/>
+    <http pattern="/register.html" security="none"/>
+
+    <!--页面拦截规则-->
+    <!--不使用SPEL表达式，false-->
+    <http use-expressions="false">
+        <!--除SELLER角色外，其余都拦截-->
+        <intercept-url pattern="/**" access="ROLE_SELLER"/>
+        <!--自定义页面-->
+        <!--配置自定义登录页面-->
+        <!--配置登录成功后跳转到首页-->
+        <!--配置登录成功后始终跳转到首页-->
+        <!--配置登录失败后重新跳转到登录页面-->
+        <!--定义发送登录请求的路径、用户名及密码参数信息名称-->
+        <form-login login-page="/shoplogin.html"
+                    default-target-url="/admin/index.html"
+                    always-use-default-target="true"
+                    authentication-failure-url="/shoplogin.html"
+                    username-parameter="username"
+                    password-parameter="password"/>
+        <!--关闭跨站请求-->
+        <csrf disabled="true"/>
+        <!--允许使用内置框架页-->
+        <headers>
+            <frame-options policy="SAMEORIGIN"/>
+        </headers>
+        <!--清除退出信息-->
+        <logout/>
+    </http>
+
+    <!--配置认证管理器-->
+    <authentication-manager>
+        <authentication-provider user-service-ref="userDetailService">
+
+            <password-encoder ref="BCryptPasswordEncoder"></password-encoder>
+
+        </authentication-provider>
+    </authentication-manager>
+
+    <!--配置认证类-->
+    <beans:bean id="userDetailService" class="com.pinyougou.shop.service.UserDetailServiceImpl">
+        <beans:property name="sellerService" ref="sellerService"/>
+    </beans:bean>
+
+
+    <!--从注册中心获取sellerService-->
+    <dubbo:application name="pinyougou-shop-web" />
+    <dubbo:registry address="zookeeper://192.168.25.128:2181"/>
+
+    <dubbo:reference
+            interface="com.pinyougou.sellergoods.SellerService"
+            id="sellerService">
+    </dubbo:reference>
+
+    <!--配置Bcrypt-->
+    <beans:bean id="BCryptPasswordEncoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+
+</beans:beans>

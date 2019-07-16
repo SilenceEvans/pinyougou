@@ -8,11 +8,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>pinyougou-content-service</artifactId>
+    <artifactId>pinyougou-user-web</artifactId>
     <packaging>war</packaging>
 
-    <!--引入依赖-->
     <dependencies>
+        <!--引入同级工程依赖-->
         <dependency>
             <groupId>com.pinyougou</groupId>
             <artifactId>pinyougou-pojo</artifactId>
@@ -20,12 +20,12 @@
         </dependency>
         <dependency>
             <groupId>com.pinyougou</groupId>
-            <artifactId>pinyougou-content-interface</artifactId>
+            <artifactId>pinyougou-user-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.pinyougou</groupId>
-            <artifactId>pinyougou-dao</artifactId>
+            <artifactId>pinyougou-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- Spring -->
@@ -61,6 +61,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
+
         <!-- dubbo相关 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -95,11 +96,6 @@
             <artifactId>servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.pinyougou</groupId>
-            <artifactId>pinyougou-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -110,7 +106,7 @@
                 <version>2.2</version>
                 <configuration>
                     <!-- 指定端口 -->
-                    <port>9002</port>
+                    <port>9106</port>
                     <!-- 请求路径 -->
                     <path>/</path>
                 </configuration>

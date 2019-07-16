@@ -17,6 +17,9 @@
         <module>pinyougou-solr-util</module>
         <module>pinyougou-search-interface</module>
         <module>pinyougou-page-interface</module>
+        <module>pinyougou-user-interface</module>
+        <module>pinyougou-user-service</module>
+        <module>pinyougou-user-web</module>
         <!--<module>pinyougou-page-service</module>-->
         <!--<module>pinyougou-sellergoods-service</module>-->
         <!--<module>pinyougou-manager-web</module>-->

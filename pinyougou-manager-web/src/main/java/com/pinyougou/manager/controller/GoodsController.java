@@ -2,6 +2,7 @@ package com.pinyougou.manager.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
+import com.pinyougou.page.service.ItemPageService;
 import com.pinyougou.pojo.Goods;
 import com.pinyougou.pojo.TbGoods;
 import com.pinyougou.pojo.TbItem;
@@ -46,6 +47,7 @@ public class GoodsController {
 
 	@Autowired
 	private Destination topicDeletePageDestination;
+
 
 	
 	/**

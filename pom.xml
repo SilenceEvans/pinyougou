@@ -18,16 +18,20 @@
         <module>pinyougou-search-interface</module>
         <module>pinyougou-page-interface</module>
         <module>pinyougou-user-interface</module>
+        <module>pinyougou-cart-interface</module>
+        <module>pinyougou-page-web</module>
+        <module>pinyougou-cart-service</module>
+        <module>pinyougou-cart-web</module>
         <module>pinyougou-user-service</module>
         <module>pinyougou-user-web</module>
-        <!--<module>pinyougou-page-service</module>-->
-        <!--<module>pinyougou-sellergoods-service</module>-->
-        <!--<module>pinyougou-manager-web</module>-->
-        <!--<module>pinyougou-shop-web</module>-->
-        <!--<module>pinyougou-content-service</module>-->
-        <!--<module>pinyougou-web-portal</module>-->
-        <!--<module>pinyougou-search-service</module>-->
-        <!--<module>pinyougou-search-web</module>-->
+        <module>pinyougou-page-service</module>
+        <module>pinyougou-sellergoods-service</module>
+        <module>pinyougou-manager-web</module>
+        <module>pinyougou-shop-web</module>
+        <module>pinyougou-content-service</module>
+        <module>pinyougou-web-portal</module>
+        <module>pinyougou-search-service</module>
+        <module>pinyougou-search-web</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->

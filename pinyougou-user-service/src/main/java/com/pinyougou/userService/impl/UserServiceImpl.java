@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
+import com.pinyougou.mapper.TbAddressMapper;
+import com.pinyougou.pojo.TbAddress;
+import com.pinyougou.pojo.TbAddressExample;
 import com.pinyougou.userService.UserService;
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -47,6 +50,9 @@ public class UserServiceImpl implements UserService {
 	private String template_code;
 	@Value("${sign_name}")
 	private String sign_name;
+
+	@Autowired
+	private TbAddressMapper addressMapper;
 	
 	/**
 	 * 查询全部
@@ -204,4 +210,19 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
+	/**
+	 * 查找用户所拥有的地址信息
+	 * @param username 用户名
+	 * @return
+	 */
+	@Override
+	public List<TbAddress> findUserAddressByUsername(String username) {
+
+		TbAddressExample example = new TbAddressExample();
+		TbAddressExample.Criteria criteria = example.createCriteria();
+		criteria.andUserIdEqualTo(username);
+		List<TbAddress> addressList = addressMapper.selectByExample(example);
+		return addressList ;
 	}
+
+}

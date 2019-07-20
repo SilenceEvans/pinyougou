@@ -1,5 +1,7 @@
 package com.pinyougou.userService;
 import java.util.List;
+
+import com.pinyougou.pojo.TbAddress;
 import com.pinyougou.pojo.TbUser;
 
 import entity.PageResult;
@@ -69,4 +71,12 @@ public interface UserService {
 	 * @return 缓存中是否存在该电话号码对应的验证码
 	 */
     Boolean checkSmsCode(String phone,String code);
+
+
+	/**
+	 * 根据用户名查找用户所拥有的地址信息
+	 * @param username 用户名
+	 * @return 用户地址信息集合
+	 */
+    List<TbAddress> findUserAddressByUsername(String username);
 }

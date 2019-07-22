@@ -2,6 +2,7 @@ package com.pinyougou.service;
 import java.util.List;
 import com.pinyougou.pojo.TbOrder;
 
+import com.pinyougou.pojo.TbPayLog;
 import entity.PageResult;
 /**
  * 服务层接口
@@ -57,5 +58,18 @@ public interface OrderService {
 	 * @return
 	 */
 	public PageResult findPage(TbOrder order, int pageNum, int pageSize);
-	
+
+	/**
+	 * 从缓存中查找订单的支付日志信息
+	 * @param username 用户名
+	 * @return 订单的支付日志信息
+	 */
+	TbPayLog findPayLogFromRedis(String username);
+
+	/**
+	 * 更改缓存中payLog的值，并将其存储至数据库表中
+	 * @param out_trade_no 支付单号
+	 * @param transaction_id 交易号码
+	 */
+	void updatePayLogStatus(String out_trade_no, String transaction_id);
 }

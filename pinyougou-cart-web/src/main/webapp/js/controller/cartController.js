@@ -86,9 +86,9 @@ app.controller("cartController",function ($scope,cartService) {
     }*/
 
     //选择支付方式
-    $scope.order={payType:"1"};
+    $scope.order={paymentType:"1"};
     $scope.selectPayType=function (type) {
-        $scope.order.payType=type;
+        $scope.order.paymentType=type;
     };
 
     //定义提交订单的方法
@@ -99,6 +99,7 @@ app.controller("cartController",function ($scope,cartService) {
         cartService.submitOrder($scope.order).success(function (response) {
             if (response.success) {
                 alert(response.message);
+                location.href="pay.html";
             }else {
                 alert(response.message);
             }

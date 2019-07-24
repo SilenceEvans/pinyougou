@@ -21,4 +21,11 @@ public interface WeChatPayService {
      * @return map集合
      */
      Map queryPayStatus(String out_trade_no);
+
+    /**
+     * 关闭订单的方法
+     * @param out_trade_no 商品下单的单号
+     * @return map集合
+     */
+     Map closePay(String out_trade_no);
 }
